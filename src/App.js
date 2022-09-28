@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import BioForm from "./components/BioForm";
+import ResultBox from "./components/ResultBox";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="w-full border-solid border-4 border-red-500">
+        <h1 className="text-center text-xl p-3 font-bold">
+          Boi Generator
+        </h1>
+      </div>
+
+      <div className="flex">
+        <BioForm />
+        <ResultBox />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
