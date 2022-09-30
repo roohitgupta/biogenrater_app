@@ -1,14 +1,96 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const BioForm = () => {
-  const [name, setName] = useState("Rohit Gupta");
+  const [name, setName] = useState("");
   const [gender, setGender] = useState("Male");
-  const [location, setLocation] = useState("Indore, Madhya Pradesh");
-  const [school, setSchool] = useState("Resonance");
-  const [major, setMajor] = useState("Robotic Arm");
+  const [location, setLocation] = useState("");
+  const [islocation, setIslocation] = useState(false);
+  const [school, setSchool] = useState("");
+  const [major, setMajor] = useState("");
   const [occupation, setOccupation] = useState("Web Developer");
   const [religious, setReligious] = useState("");
   const [missionaries, setMissionaries] = useState("");
+
+  useEffect(() => {
+    console.log(name) ;
+  }, [name]);
+
+  let nameArr = [
+    { name: "Rohit Gupta", gender: "Male" },
+    { name: "Aman Sharma", gender: "Male" },
+    { name: "Pragti Mishra", gender: "Female" },
+    { name: "Ritu Dubye", gender: "Female" },
+    { name: "Neha Verma", gender: "Female" },
+  ];
+
+  const handleName = ()=> {
+      nameArr.map((e)=>{
+        const randomName = nameArr[Math.floor(Math.random() * nameArr.length)].name;
+        return setName(randomName);
+      })
+  };
+
+
+  let locationArr = [
+    { locationName: "Indore, Madhya Pradesh"},
+    { locationName: "Bhopal, Madhya Pradesh"},
+    { locationName: "Pune, Maharastra"},
+    { locationName: "Mumbai, Maharastra"},
+    { locationName: "Banglore, Karnataka"},
+  ];
+
+  const handleLocation = ()=> {
+    locationArr.map((e)=>{
+      const randomLocation = locationArr[Math.floor(Math.random() * locationArr.length)].locationName;
+      return setLocation(randomLocation);
+    })
+};
+
+  let schoolArr = [
+    { schoolName: "G.D. Goeanka, Indore"},
+    { schoolName: "Delhi Public School, Bhopal"},
+    { schoolName: "Embreal Heights, Indore"},
+    { schoolName: "Little Angles, Gwalior"},
+  ];
+
+    const handleSchool = ()=> {
+      schoolArr.map((e)=> {
+        const randomSchool = schoolArr[Math.floor(Math.random() * schoolArr.length)].schoolName;
+        return setSchool(randomSchool);
+      })
+    };
+
+  let majorArr = [
+    { majorName: "Graphic Design" },
+    { majorName: "History" },
+    { majorName: "Cybersecurity" },
+    { majorName: "Chemistry" },
+    { majorName: "Information Technology" },
+  ];
+
+    const handleMajor = ()=> {
+      majorArr.map((e)=> {
+        const randomMajor = majorArr[Math.floor(Math.random() * majorArr.length)].majorName
+        return setMajor(randomMajor);
+      })
+    };
+
+    let occupationArr = [
+      { occName: "musician" },
+      { occName: "salesperson" },
+      { occName: "web developer" },
+      { occName: "pilot" },
+      { occName: "scooba diver" },
+    ];
+
+      const handleOccupation = ()=> {
+        occupationArr.map((e)=> {
+          const randomOccu = occupationArr[Math.floor(Math.random() * occupationArr.length)].occName;
+          return setOccupation(randomOccu);
+        })
+      }
+
+
 
   return (
     <div className="flex flex-col items-center justify-center lg:flex-row lg:items-start ">
@@ -21,6 +103,7 @@ const BioForm = () => {
             <input
               className="p-1.5 mx-2 rounded-md shadow-sm"
               type="text"
+              value={name}
               placeholder="Full Name"
               onChange={(e) => setName(e.target.value)}
             />
@@ -29,14 +112,18 @@ const BioForm = () => {
             <label htmlFor="">Gender</label>
             <select
               className="w-full mx-2 p-1.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
-              onChange={(e) => setGender(e.target.value)}
+              value={gender}
+              onChange={(e) => setGender(e.target.value)
+              }
             >
               <option>Male</option>
               <option>Female</option>
             </select>
           </div>
           <div className="">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+            onClick={(e)=> handleName()}
+            >
               Random Name
             </button>
           </div>
@@ -44,22 +131,28 @@ const BioForm = () => {
         {/* second line of form ===========*/}
         <div className="flex justify-between items-center text-sm bg-gray-200 my-3 w-full h-30 p-3">
           <div className="form-check">
-            <label class="inline-flex items-center">
+            <label className="inline-flex items-center">
               <input
                 type="checkbox"
-                class="form-checkbox h-5 w-5 text-gray-600"
+                className="form-checkbox h-5 w-5 text-gray-600"
+                onChange={(e) =>
+                  islocation ? setIslocation(false) : setIslocation(true)
+                }
               />
-              <span class="ml-2 text-gray-700">Location</span>
+              <span className="ml-2 text-gray-700">Location</span>
             </label>
             <input
               className="p-1.5 mx-2 border rounded-md shadow-sm"
               type="text"
               placeholder="Location"
-              onChange={(e)=> setLocation(e.target.value)}
+              value={location}
+              onChange={(e) =>
+                islocation ? setLocation(e.target.value) : setLocation("null")
+              }
             />
           </div>
           <div className="h-full">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+            <button onClick={(e)=> handleLocation()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
               Random Location
             </button>
           </div>
@@ -68,22 +161,23 @@ const BioForm = () => {
         <div className="flex flex-col bg-gray-200 text-sm my-3 w-full h-30 p-3">
           <div className="flex justify-between items-center mb-2">
             <div className="form-check">
-              <label class="inline-flex items-center">
+              <label className="inline-flex items-center">
                 <input
                   type="checkbox"
-                  class="form-checkbox h-5 w-5 text-gray-600"
+                  className="form-checkbox h-5 w-5 text-gray-600"
                 />
-                <span class="ml-2 text-gray-700">School</span>
+                <span className="ml-2 text-gray-700">School</span>
               </label>
               <input
                 className="p-1.5 mx-2 border rounded-md shadow-sm"
                 type="text"
                 placeholder="School"
-                onChange={(e)=> setSchool(e.target.value)}
+                value={school}
+                onChange={(e) => setSchool(e.target.value)}
               />
             </div>
             <div className="h-full">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onClick={(e)=> handleSchool()}>
                 Random School
               </button>
             </div>
@@ -95,12 +189,13 @@ const BioForm = () => {
                 className="p-1.5 mx-2 rounded-md shadow-sm"
                 type="text"
                 placeholder="Major"
+                value={major}
                 onChange={(e) => setMajor(e.target.value)}
               />
             </div>
 
             <div>
-              <button className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-1 px-2 rounded">
+              <button className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-1 px-2 rounded" onClick={(e)=> handleMajor()}>
                 Random Major
               </button>
             </div>
@@ -109,22 +204,23 @@ const BioForm = () => {
         {/* fourth line of form */}
         <div className="flex justify-between items-center mb-2 bg-gray-200 text-sm my-3 w-full h-30 p-3">
           <div className="form-check">
-            <label class="inline-flex items-center">
+            <label className="inline-flex items-center">
               <input
                 type="checkbox"
-                class="form-checkbox h-5 w-5 text-gray-600"
+                className="form-checkbox h-5 w-5 text-gray-600"
               />
-              <span class="ml-2 text-gray-700">Occupation</span>
+              <span className="ml-2 text-gray-700">Occupation</span>
             </label>
             <input
               className="p-1.5 mx-2 border rounded-md shadow-sm"
               type="text"
               placeholder="Occupation"
-              onChange={(e)=> setOccupation(e.target.value)}
+              value={occupation}
+              onChange={(e) => setOccupation(e.target.value)}
             />
           </div>
           <div className="h-full">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onClick={(e)=> handleOccupation()}>
               Random Occupation
             </button>
           </div>
@@ -132,12 +228,12 @@ const BioForm = () => {
         {/* fifth line of form */}
         <div className="flex justify-between flex-col  mb-2 bg-gray-200 text-sm my-3 w-full h-30 p-3">
           <div className="form-check">
-            <label class="inline-flex items-center">
+            <label className="inline-flex items-center">
               <input
                 type="checkbox"
-                class="form-checkbox h-5 w-5 text-gray-600"
+                className="form-checkbox h-5 w-5 text-gray-600"
               />
-              <span class="ml-2 text-gray-700">Religious Background</span>
+              <span className="ml-2 text-gray-700">Religious Background</span>
             </label>
             <div>
               <textarea
@@ -145,7 +241,7 @@ const BioForm = () => {
                 rows="4"
                 type="text"
                 placeholder="Religious Background"
-                onChange={(e)=> setReligious(e.target.value)}
+                onChange={(e) => setReligious(e.target.value)}
               ></textarea>
             </div>
           </div>
@@ -158,12 +254,12 @@ const BioForm = () => {
         {/* sixth line of form */}
         <div className="flex justify-between flex-col  mb-2 bg-gray-200 text-sm my-3 w-full h-30 p-3">
           <div className="form-check">
-            <label class="inline-flex items-center">
+            <label className="inline-flex items-center">
               <input
                 type="checkbox"
-                class="form-checkbox h-5 w-5 text-gray-600"
+                className="form-checkbox h-5 w-5 text-gray-600"
               />
-              <span class="ml-2 text-gray-700">
+              <span className="ml-2 text-gray-700">
                 Reason for meeting with missionaries
               </span>
             </label>
@@ -173,7 +269,7 @@ const BioForm = () => {
                 rows="4"
                 type="text"
                 placeholder="Reason for meeting with missionaries"
-                onChange={(e)=> setMissionaries(e.target.value)}
+                onChange={(e) => setMissionaries(e.target.value)}
               ></textarea>
             </div>
           </div>
@@ -197,7 +293,11 @@ const BioForm = () => {
       <div className="w-2/5 h-64 m-3 lg:mt-14 lg:ml-5 border-solid border-4 border-sky-500 lg:w-1/5">
         <h1 className="text-xl text-center font-bold underline">Result Box</h1>
         <h3 className="p-4">
-          My name is {name}, and I'm {gender}, my location is {location}, my school was {school}, in school my major project was {major}, right now my occupation is {occupation}, {religious.length > 0 ? religious : "I respect every god"}, {missionaries.length > 0 ? missionaries : "we are not alone"}
+          My name is {name}, and I'm {gender}, my location is {location}, my
+          school was {school}, in school my major project was {major}, right now
+          my occupation is {occupation},{" "}
+          {religious.length > 0 ? religious : "I respect every god"},{" "}
+          {missionaries.length > 0 ? missionaries : "we are not alone"}
         </h3>
       </div>
     </div>
