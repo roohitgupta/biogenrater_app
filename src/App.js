@@ -4,9 +4,9 @@ import BioForm from "./components/BioForm";
 const App = () => {
   return (
     <div>
-      <div className="w-full border-solid border-4 border-red-500">
-        <h1 className="text-center text-xl p-3 font-bold">
-          Boi Generator
+      <div className="w-full bg-gray-300">
+        <h1 className="text-center text-2xl underline p-3 font-bold">
+        Bio Generator
         </h1>
       </div>
 

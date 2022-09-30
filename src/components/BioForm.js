@@ -5,8 +5,8 @@ const BioForm = () => {
   const [gender, setGender] = useState("Male");
 
   return (
-    <div className="flex flex-col items-center lg:flex-row justify-center">
-      <div className="w-2/3 h-full m-3 border-solid border-4 border-sky-500 lg:w-1/2">
+    <div className="flex flex-col items-center justify-center lg:flex-row lg:items-start ">
+      <div className="w-2/3 h-full m-3  lg:w-1/3">
         <h1 className="text-xl text-center font-bold underline">Bio Form</h1>
         {/* first line of form =================*/}
         <div className="flex justify-between items-center text-sm bg-gray-200 my-3 w-full h-30  p-3">
@@ -183,9 +183,9 @@ const BioForm = () => {
         </div>
       </div>
       {/* Result box */}
-      <div className="w-1/2 h-64 m-3 border-solid border-4 border-sky-500 lg:w-1/3">
+      <div className="w-2/5 h-64 m-3 lg:mt-14 lg:ml-5 border-solid border-4 border-sky-500 lg:w-1/5">
         <h1 className="text-xl text-center font-bold underline">Result Box</h1>
-        <h3>
+        <h3 className="p-4">
           My name is {name}. and I'm {gender}
         </h3>
       </div>
