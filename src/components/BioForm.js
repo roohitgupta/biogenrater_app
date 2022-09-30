@@ -11,10 +11,6 @@ const BioForm = () => {
   const [religious, setReligious] = useState("");
   const [missionaries, setMissionaries] = useState("");
 
-  useEffect(() => {
-    console.log(name) ;
-  }, [name]);
-
   let nameArr = [
     { name: "Rohit Gupta", gender: "Male" },
     { name: "Aman Sharma", gender: "Male" },
@@ -23,42 +19,45 @@ const BioForm = () => {
     { name: "Neha Verma", gender: "Female" },
   ];
 
-  const handleName = ()=> {
-      nameArr.map((e)=>{
-        const randomName = nameArr[Math.floor(Math.random() * nameArr.length)].name;
-        return setName(randomName);
-      })
+  const handleName = () => {
+    nameArr.map((e) => {
+      const randomName =
+        nameArr[Math.floor(Math.random() * nameArr.length)].name;
+      return setName(randomName);
+    });
   };
 
-
   let locationArr = [
-    { locationName: "Indore, Madhya Pradesh"},
-    { locationName: "Bhopal, Madhya Pradesh"},
-    { locationName: "Pune, Maharastra"},
-    { locationName: "Mumbai, Maharastra"},
-    { locationName: "Banglore, Karnataka"},
+    { locationName: "Indore, Madhya Pradesh" },
+    { locationName: "Bhopal, Madhya Pradesh" },
+    { locationName: "Pune, Maharastra" },
+    { locationName: "Mumbai, Maharastra" },
+    { locationName: "Banglore, Karnataka" },
   ];
 
-  const handleLocation = ()=> {
-    locationArr.map((e)=>{
-      const randomLocation = locationArr[Math.floor(Math.random() * locationArr.length)].locationName;
+  const handleLocation = () => {
+    locationArr.map((e) => {
+      const randomLocation =
+        locationArr[Math.floor(Math.random() * locationArr.length)]
+          .locationName;
       return setLocation(randomLocation);
-    })
-};
+    });
+  };
 
   let schoolArr = [
-    { schoolName: "G.D. Goeanka, Indore"},
-    { schoolName: "Delhi Public School, Bhopal"},
-    { schoolName: "Embreal Heights, Indore"},
-    { schoolName: "Little Angles, Gwalior"},
+    { schoolName: "G.D. Goeanka, Indore" },
+    { schoolName: "Delhi Public School, Bhopal" },
+    { schoolName: "Embreal Heights, Indore" },
+    { schoolName: "Little Angles, Gwalior" },
   ];
 
-    const handleSchool = ()=> {
-      schoolArr.map((e)=> {
-        const randomSchool = schoolArr[Math.floor(Math.random() * schoolArr.length)].schoolName;
-        return setSchool(randomSchool);
-      })
-    };
+  const handleSchool = () => {
+    schoolArr.map((e) => {
+      const randomSchool =
+        schoolArr[Math.floor(Math.random() * schoolArr.length)].schoolName;
+      return setSchool(randomSchool);
+    });
+  };
 
   let majorArr = [
     { majorName: "Graphic Design" },
@@ -68,27 +67,63 @@ const BioForm = () => {
     { majorName: "Information Technology" },
   ];
 
-    const handleMajor = ()=> {
-      majorArr.map((e)=> {
-        const randomMajor = majorArr[Math.floor(Math.random() * majorArr.length)].majorName
-        return setMajor(randomMajor);
-      })
-    };
+  const handleMajor = () => {
+    majorArr.map((e) => {
+      const randomMajor =
+        majorArr[Math.floor(Math.random() * majorArr.length)].majorName;
+      return setMajor(randomMajor);
+    });
+  };
 
-    let occupationArr = [
-      { occName: "musician" },
-      { occName: "salesperson" },
-      { occName: "web developer" },
-      { occName: "pilot" },
-      { occName: "scooba diver" },
-    ];
+  let occupationArr = [
+    { occName: "musician" },
+    { occName: "salesperson" },
+    { occName: "web developer" },
+    { occName: "pilot" },
+    { occName: "scooba diver" },
+  ];
 
-      const handleOccupation = ()=> {
-        occupationArr.map((e)=> {
-          const randomOccu = occupationArr[Math.floor(Math.random() * occupationArr.length)].occName;
-          return setOccupation(randomOccu);
-        })
-      }
+  const handleOccupation = () => {
+    occupationArr.map((e) => {
+      const randomOccu =
+        occupationArr[Math.floor(Math.random() * occupationArr.length)].occName;
+      return setOccupation(randomOccu);
+    });
+  };
+
+
+  let religiousArr = [
+    { rele: "in a family that always encouraged a belief in God, but never attended one church consistently" },
+    { rele: "believing in Christ because [SubjectPronoun] was taught to as grew up" },
+    { rele: "without any religion in the home, but is open to learning more about religion" },
+    { rele: "in a community where religion was very polarized, and [SubjectPronoun] struggles with wanting to be a part of religion after having bad experiences from adolescence" },
+  ];
+
+  const handleRelegious = ()=> {
+    religiousArr.map((e)=> {
+      const randomRele = religiousArr[Math.floor(Math.random() * religiousArr.length)].rele;
+      return setReligious(randomRele);
+    })
+  };
+
+  
+  let missArr = [
+    { miss: "wants to know if God really does exist and how that affects " },
+    { miss: "recieved a priesthood blessing from a friend and now wants to learn more" },
+    { miss: "often worries that God is disappointed in for not following him better and wants to know how to change" },
+    { miss: "has recently lost a loved one, and is looking for ways to find peace during this difficult time" },
+    { miss: "met the missionaries while they were out knocking doors, and was curious about their message. is a little hesitant to meet with them, but is willing to give it a chance" },
+  ];
+
+   const handleMissionaries = ()=> {
+     missArr.map((e)=> {
+       const randomMiss = missArr[Math.floor(Math.random() * missArr.length)].miss;
+       return setMissionaries(randomMiss);
+     })
+   }
+
+
+
 
 
 
@@ -113,16 +148,16 @@ const BioForm = () => {
             <select
               className="w-full mx-2 p-1.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
               value={gender}
-              onChange={(e) => setGender(e.target.value)
-              }
+              onChange={(e) => setGender(e.target.value)}
             >
               <option>Male</option>
               <option>Female</option>
             </select>
           </div>
           <div className="">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-            onClick={(e)=> handleName()}
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+              onClick={(e) => handleName()}
             >
               Random Name
             </button>
@@ -152,7 +187,10 @@ const BioForm = () => {
             />
           </div>
           <div className="h-full">
-            <button onClick={(e)=> handleLocation()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+            <button
+              onClick={(e) => handleLocation()}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+            >
               Random Location
             </button>
           </div>
@@ -177,7 +215,10 @@ const BioForm = () => {
               />
             </div>
             <div className="h-full">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onClick={(e)=> handleSchool()}>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+                onClick={(e) => handleSchool()}
+              >
                 Random School
               </button>
             </div>
@@ -195,7 +236,10 @@ const BioForm = () => {
             </div>
 
             <div>
-              <button className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-1 px-2 rounded" onClick={(e)=> handleMajor()}>
+              <button
+                className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-1 px-2 rounded"
+                onClick={(e) => handleMajor()}
+              >
                 Random Major
               </button>
             </div>
@@ -220,7 +264,10 @@ const BioForm = () => {
             />
           </div>
           <div className="h-full">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onClick={(e)=> handleOccupation()}>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+              onClick={(e) => handleOccupation()}
+            >
               Random Occupation
             </button>
           </div>
@@ -241,13 +288,14 @@ const BioForm = () => {
                 rows="4"
                 type="text"
                 placeholder="Religious Background"
+                value={religious}
                 onChange={(e) => setReligious(e.target.value)}
               ></textarea>
             </div>
           </div>
           <div className="h-full">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
-              Random Occupation
+            <button onClick={(e)=> handleRelegious()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+              Random Religious
             </button>
           </div>
         </div>
@@ -269,21 +317,22 @@ const BioForm = () => {
                 rows="4"
                 type="text"
                 placeholder="Reason for meeting with missionaries"
+                value={missionaries}
                 onChange={(e) => setMissionaries(e.target.value)}
               ></textarea>
             </div>
           </div>
           <div className="h-full">
-            <button className="bg-pink-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded">
+            <button className="bg-pink-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded" onClick={(e)=> handleMissionaries()}>
               Restoration
             </button>
-            <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded">
+            <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded" onClick={(e)=> handleMissionaries()}>
               Plan of Salvation
             </button>
-            <button className="bg-purple-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded">
+            <button className="bg-purple-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded" onClick={(e)=> handleMissionaries()}>
               Gospel of Christ
             </button>
-            <button className="bg-orange-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded">
+            <button className="bg-orange-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded" onClick={(e)=> handleMissionaries()}>
               Law of Chastity
             </button>
           </div>
