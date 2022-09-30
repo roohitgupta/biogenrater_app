@@ -11,9 +11,9 @@ const App = () => {
         </h1>
       </div>
 
-      <div className="flex">
+      <div className="flex w-full content-evenly border-dotted border-3 border-red-400">
         <BioForm />
-        <ResultBox />
+        {/* <ResultBox /> */}
       </div>
     </div>
   );
