@@ -3,6 +3,12 @@ import React, { useState } from "react";
 const BioForm = () => {
   const [name, setName] = useState("Rohit Gupta");
   const [gender, setGender] = useState("Male");
+  const [location, setLocation] = useState("Indore, Madhya Pradesh");
+  const [school, setSchool] = useState("Resonance");
+  const [major, setMajor] = useState("Robotic Arm");
+  const [occupation, setOccupation] = useState("Web Developer");
+  const [religious, setReligious] = useState("");
+  const [missionaries, setMissionaries] = useState("");
 
   return (
     <div className="flex flex-col items-center justify-center lg:flex-row lg:items-start ">
@@ -49,6 +55,7 @@ const BioForm = () => {
               className="p-1.5 mx-2 border rounded-md shadow-sm"
               type="text"
               placeholder="Location"
+              onChange={(e)=> setLocation(e.target.value)}
             />
           </div>
           <div className="h-full">
@@ -72,6 +79,7 @@ const BioForm = () => {
                 className="p-1.5 mx-2 border rounded-md shadow-sm"
                 type="text"
                 placeholder="School"
+                onChange={(e)=> setSchool(e.target.value)}
               />
             </div>
             <div className="h-full">
@@ -87,7 +95,7 @@ const BioForm = () => {
                 className="p-1.5 mx-2 rounded-md shadow-sm"
                 type="text"
                 placeholder="Major"
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setMajor(e.target.value)}
               />
             </div>
 
@@ -112,6 +120,7 @@ const BioForm = () => {
               className="p-1.5 mx-2 border rounded-md shadow-sm"
               type="text"
               placeholder="Occupation"
+              onChange={(e)=> setOccupation(e.target.value)}
             />
           </div>
           <div className="h-full">
@@ -135,7 +144,8 @@ const BioForm = () => {
                 className="p-1.5 w-full text-base mx-2 border rounded-md shadow-sm"
                 rows="4"
                 type="text"
-                placeholder="Occupation"
+                placeholder="Religious Background"
+                onChange={(e)=> setReligious(e.target.value)}
               ></textarea>
             </div>
           </div>
@@ -162,7 +172,8 @@ const BioForm = () => {
                 className="p-1.5 w-full text-base mx-2 border rounded-md shadow-sm"
                 rows="4"
                 type="text"
-                placeholder="Occupation"
+                placeholder="Reason for meeting with missionaries"
+                onChange={(e)=> setMissionaries(e.target.value)}
               ></textarea>
             </div>
           </div>
@@ -186,7 +197,7 @@ const BioForm = () => {
       <div className="w-2/5 h-64 m-3 lg:mt-14 lg:ml-5 border-solid border-4 border-sky-500 lg:w-1/5">
         <h1 className="text-xl text-center font-bold underline">Result Box</h1>
         <h3 className="p-4">
-          My name is {name}. and I'm {gender}
+          My name is {name}, and I'm {gender}, my location is {location}, my school was {school}, in school my major project was {major}, right now my occupation is {occupation}, {religious.length > 0 ? religious : "I respect every god"}, {missionaries.length > 0 ? missionaries : "we are not alone"}
         </h3>
       </div>
     </div>
