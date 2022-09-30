@@ -1,6 +1,5 @@
 import React from "react";
 import BioForm from "./components/BioForm";
-import ResultBox from "./components/ResultBox";
 
 const App = () => {
   return (
@@ -11,10 +10,9 @@ const App = () => {
         </h1>
       </div>
 
-      <div className="flex w-full content-evenly border-dotted border-3 border-red-400">
+     
         <BioForm />
-        {/* <ResultBox /> */}
-      </div>
+ 
     </div>
   );
 };
