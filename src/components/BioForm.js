@@ -155,7 +155,6 @@ const BioForm = () => {
     axios.get(`https://libretranslate.de/languages`).then((response) => {
       setLanguagesList(response.data);
     });
-    getLanguageSource();
   }, [inputText]);
 
   return (
