@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 
 const BioForm = () => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState("Rohit Gupta");
   const [gender, setGender] = useState("Male");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("Delhi, NCR");
   const [islocation, setIslocation] = useState(false);
-  const [school, setSchool] = useState("");
-  const [major, setMajor] = useState("");
+  const [school, setSchool] = useState("Delhi Public School");
+  const [isschool, setIsschool] = useState(false);
+  const [major, setMajor] = useState("Robotic Arm");
   const [occupation, setOccupation] = useState("Web Developer");
+  const [isoccupation, setIsoccupation] = useState(false);
   const [religious, setReligious] = useState("");
+  const [isreligious, setIsreligious] = useState(false);
   const [missionaries, setMissionaries] = useState("");
+  const [ismissionaries, setIsmissionaries] = useState(false);
 
   let nameArr = [
     { name: "Rohit Gupta", gender: "Male" },
@@ -28,104 +32,85 @@ const BioForm = () => {
   };
 
   let locationArr = [
-    { locationName: "Indore, Madhya Pradesh" },
-    { locationName: "Bhopal, Madhya Pradesh" },
-    { locationName: "Pune, Maharastra" },
-    { locationName: "Mumbai, Maharastra" },
-    { locationName: "Banglore, Karnataka" },
+    "Indore, Madhya Pradesh",
+    "Bhopal, Madhya Pradesh",
+    "Pune, Maharastra",
+    "Mumbai, Maharastra",
+    "Banglore, Karnataka",
   ];
 
   const handleLocation = () => {
-    locationArr.map((e) => {
-      const randomLocation =
-        locationArr[Math.floor(Math.random() * locationArr.length)]
-          .locationName;
-      return setLocation(randomLocation);
-    });
+    const randomLocation =
+      locationArr[Math.floor(Math.random() * locationArr.length)];
+    setLocation(randomLocation);
   };
 
   let schoolArr = [
-    { schoolName: "G.D. Goeanka, Indore" },
-    { schoolName: "Delhi Public School, Bhopal" },
-    { schoolName: "Embreal Heights, Indore" },
-    { schoolName: "Little Angles, Gwalior" },
+    "G.D. Goeanka, Indore",
+    "Delhi Public School, Bhopal",
+    "Embreal Heights, Indore",
+    "Little Angles, Gwalior",
   ];
 
   const handleSchool = () => {
-    schoolArr.map((e) => {
-      const randomSchool =
-        schoolArr[Math.floor(Math.random() * schoolArr.length)].schoolName;
-      return setSchool(randomSchool);
-    });
+    const randomSchool =
+      schoolArr[Math.floor(Math.random() * schoolArr.length)];
+    setSchool(randomSchool);
   };
 
   let majorArr = [
-    { majorName: "Graphic Design" },
-    { majorName: "History" },
-    { majorName: "Cybersecurity" },
-    { majorName: "Chemistry" },
-    { majorName: "Information Technology" },
+    "Graphic Design",
+    "History",
+    "Cybersecurity",
+    "Chemistry",
+    "Information Technology",
   ];
 
   const handleMajor = () => {
-    majorArr.map((e) => {
-      const randomMajor =
-        majorArr[Math.floor(Math.random() * majorArr.length)].majorName;
-      return setMajor(randomMajor);
-    });
+    const randomMajor =
+      majorArr[Math.floor(Math.random() * majorArr.length)];
+    setMajor(randomMajor);
   };
 
   let occupationArr = [
-    { occName: "musician" },
-    { occName: "salesperson" },
-    { occName: "web developer" },
-    { occName: "pilot" },
-    { occName: "scooba diver" },
+    "musician",
+    "salesperson",
+    "web developer",
+    "pilot",
+    "scooba diver",
   ];
 
   const handleOccupation = () => {
-    occupationArr.map((e) => {
-      const randomOccu =
-        occupationArr[Math.floor(Math.random() * occupationArr.length)].occName;
-      return setOccupation(randomOccu);
-    });
+    const randomOccu =
+      occupationArr[Math.floor(Math.random() * occupationArr.length)];
+    setOccupation(randomOccu);
   };
-
 
   let religiousArr = [
-    { rele: "in a family that always encouraged a belief in God, but never attended one church consistently" },
-    { rele: "believing in Christ because [SubjectPronoun] was taught to as grew up" },
-    { rele: "without any religion in the home, but is open to learning more about religion" },
-    { rele: "in a community where religion was very polarized, and [SubjectPronoun] struggles with wanting to be a part of religion after having bad experiences from adolescence" },
+    "in a family that always encouraged a belief in God, but never attended one church consistently",
+    "believing in Christ because was taught to as grew up",
+    "without any religion in the home, but is open to learning more about religion",
+    "in a community where religion was very polarized, and struggles with wanting to be a part of religion after having bad experiences from adolescence",
   ];
 
-  const handleRelegious = ()=> {
-    religiousArr.map((e)=> {
-      const randomRele = religiousArr[Math.floor(Math.random() * religiousArr.length)].rele;
-      return setReligious(randomRele);
-    })
+  const handleRelegious = () => {
+    const randomRele =
+      religiousArr[Math.floor(Math.random() * religiousArr.length)];
+    setReligious(randomRele);
   };
 
-  
   let missArr = [
-    { miss: "wants to know if God really does exist and how that affects " },
-    { miss: "recieved a priesthood blessing from a friend and now wants to learn more" },
-    { miss: "often worries that God is disappointed in for not following him better and wants to know how to change" },
-    { miss: "has recently lost a loved one, and is looking for ways to find peace during this difficult time" },
-    { miss: "met the missionaries while they were out knocking doors, and was curious about their message. is a little hesitant to meet with them, but is willing to give it a chance" },
+    "wants to know if God really does exist and how that affects ",
+    "recieved a priesthood blessing from a friend and now wants to learn more",
+    "often worries that God is disappointed in for not following him better and wants to know how to change",
+    "has recently lost a loved one, and is looking for ways to find peace during this difficult time",
+    "met the missionaries while they were out knocking doors, and was curious about their message. is a little hesitant to meet with them, but is willing to give it a chance",
   ];
 
-   const handleMissionaries = ()=> {
-     missArr.map((e)=> {
-       const randomMiss = missArr[Math.floor(Math.random() * missArr.length)].miss;
-       return setMissionaries(randomMiss);
-     })
-   }
-
-
-
-
-
+  const handleMissionaries = () => {
+    const randomMiss = missArr[Math.floor(Math.random() * missArr.length)];
+    setMissionaries(randomMiss);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center lg:flex-row lg:items-start ">
@@ -182,7 +167,7 @@ const BioForm = () => {
               placeholder="Location"
               value={location}
               onChange={(e) =>
-                islocation ? setLocation(e.target.value) : setLocation("null")
+                islocation ? setLocation(e.target.value) : setLocation(null)
               }
             />
           </div>
@@ -203,6 +188,7 @@ const BioForm = () => {
                 <input
                   type="checkbox"
                   className="form-checkbox h-5 w-5 text-gray-600"
+                  onChange={(e)=> isschool ? setIsschool(false) : setIsschool(true)}
                 />
                 <span className="ml-2 text-gray-700">School</span>
               </label>
@@ -211,7 +197,7 @@ const BioForm = () => {
                 type="text"
                 placeholder="School"
                 value={school}
-                onChange={(e) => setSchool(e.target.value)}
+                onChange={(e) => isschool ? setSchool(e.target.value) : setSchool(null)}
               />
             </div>
             <div className="h-full">
@@ -252,6 +238,7 @@ const BioForm = () => {
               <input
                 type="checkbox"
                 className="form-checkbox h-5 w-5 text-gray-600"
+                onChange={(e)=> isoccupation ? setIsoccupation(false) : setIsoccupation(true)}
               />
               <span className="ml-2 text-gray-700">Occupation</span>
             </label>
@@ -260,7 +247,7 @@ const BioForm = () => {
               type="text"
               placeholder="Occupation"
               value={occupation}
-              onChange={(e) => setOccupation(e.target.value)}
+              onChange={(e) => isoccupation ? setOccupation(e.target.value) : setOccupation(null)}
             />
           </div>
           <div className="h-full">
@@ -279,6 +266,7 @@ const BioForm = () => {
               <input
                 type="checkbox"
                 className="form-checkbox h-5 w-5 text-gray-600"
+                onChange={(e)=> isreligious ? setIsreligious(false) : setIsreligious(true)}
               />
               <span className="ml-2 text-gray-700">Religious Background</span>
             </label>
@@ -289,12 +277,15 @@ const BioForm = () => {
                 type="text"
                 placeholder="Religious Background"
                 value={religious}
-                onChange={(e) => setReligious(e.target.value)}
+                onChange={(e) => isreligious ? setReligious(e.target.value) : setReligious(null)}
               ></textarea>
             </div>
           </div>
           <div className="h-full">
-            <button onClick={(e)=> handleRelegious()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+            <button
+              onClick={(e) => handleRelegious()}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+            >
               Random Religious
             </button>
           </div>
@@ -306,6 +297,7 @@ const BioForm = () => {
               <input
                 type="checkbox"
                 className="form-checkbox h-5 w-5 text-gray-600"
+                onChange={(e)=> ismissionaries ? setIsmissionaries(false) : setIsmissionaries(true)}
               />
               <span className="ml-2 text-gray-700">
                 Reason for meeting with missionaries
@@ -318,21 +310,33 @@ const BioForm = () => {
                 type="text"
                 placeholder="Reason for meeting with missionaries"
                 value={missionaries}
-                onChange={(e) => setMissionaries(e.target.value)}
+                onChange={(e) => ismissionaries ? setMissionaries(e.target.value) : setMissionaries(null)}
               ></textarea>
             </div>
           </div>
           <div className="h-full">
-            <button className="bg-pink-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded" onClick={(e)=> handleMissionaries()}>
+            <button
+              className="bg-pink-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded"
+              onClick={(e) => handleMissionaries()}
+            >
               Restoration
             </button>
-            <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded" onClick={(e)=> handleMissionaries()}>
+            <button
+              className="bg-green-500 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded"
+              onClick={(e) => handleMissionaries()}
+            >
               Plan of Salvation
             </button>
-            <button className="bg-purple-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded" onClick={(e)=> handleMissionaries()}>
+            <button
+              className="bg-purple-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded"
+              onClick={(e) => handleMissionaries()}
+            >
               Gospel of Christ
             </button>
-            <button className="bg-orange-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded" onClick={(e)=> handleMissionaries()}>
+            <button
+              className="bg-orange-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded"
+              onClick={(e) => handleMissionaries()}
+            >
               Law of Chastity
             </button>
           </div>
@@ -342,11 +346,10 @@ const BioForm = () => {
       <div className="w-2/5 h-64 m-3 lg:mt-14 lg:ml-5 border-solid border-4 border-sky-500 lg:w-1/5">
         <h1 className="text-xl text-center font-bold underline">Result Box</h1>
         <h3 className="p-4">
-          My name is {name}, and I'm {gender}, my location is {location}, my
-          school was {school}, in school my major project was {major}, right now
-          my occupation is {occupation},{" "}
-          {religious.length > 0 ? religious : "I respect every god"},{" "}
-          {missionaries.length > 0 ? missionaries : "we are not alone"}
+          My name is {name}, and I'm {gender},
+          {islocation ? ` my location is ${location},` : ""} {isschool ? `my school was
+          ${school},` : ""} my major project was {major}, {isoccupation ? `right now my occupation is ${occupation},` : ""} {isreligious ? `I respect every god ${religious},` : ""}
+          {ismissionaries ? `my missionaries is ${missionaries}.` : ""}
         </h3>
       </div>
     </div>
