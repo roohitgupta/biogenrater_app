@@ -14,7 +14,7 @@ const BioForm = () => {
   const [isreligious, setIsreligious] = useState(false);
   const [missionaries, setMissionaries] = useState("");
   const [ismissionaries, setIsmissionaries] = useState(false);
-  const [file, setFile] = useState();
+  const [file, setFile] = useState("/rohit.jpg");
 
   let nameArr = [
     { name: "Rohit Gupta", gender: "Male" },
@@ -25,11 +25,9 @@ const BioForm = () => {
   ];
 
   const handleName = () => {
-    nameArr.map((e) => {
-      const randomName =
-        nameArr[Math.floor(Math.random() * nameArr.length)].name;
-      return setName(randomName);
-    });
+    const randomName = nameArr[Math.floor(Math.random() * nameArr.length)].name;
+
+    setName(randomName);
   };
 
   let locationArr = [
@@ -122,6 +120,21 @@ const BioForm = () => {
         <h1 className="text-xl text-center font-bold py-2 rounded-md shadow-lg bg-gray-200">
           Options
         </h1>
+        {/* image file */}
+        <div className="flex justify-between items-center mb-2 rounded-md shadow-lg bg-gray-200 text-sm my-3 w-full h-30 p-3">
+          <div className="form-check">
+            <input
+              className="p-1.5 mx-2 border rounded-md shadow-sm"
+              type="file"
+              onChange={(e) => handleImage(e)}
+            />
+          </div>
+          <div className="h-full">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+              Upload File
+            </button>
+          </div>
+        </div>
         {/* first line of form =================*/}
         <div className="flex justify-between items-center text-sm rounded-md shadow-lg bg-gray-200 my-3 w-full h-30  p-3">
           <div className="flex">
@@ -372,37 +385,28 @@ const BioForm = () => {
           </div>
         </div>
         {/* seventh line of code upload file */}
-        <div className="flex justify-between items-center mb-2 rounded-md shadow-lg bg-gray-200 text-sm my-3 w-full h-30 p-3">
-          <div className="form-check">
-            <input
-              className="p-1.5 mx-2 border rounded-md shadow-sm"
-              type="file"
-              onChange={(e) => handleImage(e)}
-            />
-          </div>
-          <div className="h-full">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
-              Upload File
-            </button>
-          </div>
-        </div>
+        
       </div>
       {/* Result box */}
       <div className="w-2/5 h-64 m-3 lg:mt-10 lg:ml-5 flex flex-col items-center font-mono lg:w-1/5">
         <h1 className="text-xl w-full text-center font-bold py-2 rounded-md shadow-lg bg-gray-200 mb-3">
           Result
         </h1>
-        <img className="h-48 rounded-lg my-4" src={file} alt="Please Upload Your Face" />
+        <img
+          className="h-48 rounded-lg my-4"
+          src={file}
+          alt="Please Upload Your Face"
+        />
         <h3 className="p-4 w-full bg-gray-200 rounded-md shadow-lg">
           My name is {name}, and I'm {gender},
-          {islocation ? ` my location is ${location},` : ""}{" "}
+          {islocation ? ` my location is ${location},` : ""}
           {isschool
-            ? `my school was
+            ? ` my school was
           ${school},`
             : ""}{" "}
-          my major project was {major},{" "}
-          {isoccupation ? `right now my occupation is ${occupation},` : ""}{" "}
-          {isreligious ? `I respect every god ${religious},` : ""}
+          my major project was {major},
+          {isoccupation ? ` right now my occupation is ${occupation},` : ""}
+          {isreligious ? ` I respect every god ${religious},` : ""}
           {ismissionaries ? ` my missionaries is ${missionaries}.` : ""}
         </h3>
       </div>
