@@ -113,11 +113,11 @@ const BioForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center lg:flex-row lg:items-start ">
-      <div className="w-2/3 h-full m-3  lg:w-1/3">
-        <h1 className="text-xl text-center font-bold underline">Bio Form</h1>
+    <div className="flex flex-col items-center justify-center lg:flex-row lg:pb-14 sm:pb-24 lg:items-start ">
+      <div className="w-2/3 h-full m-3 font-mono lg:mt-10 lg:w-1/3">
+        <h1 className="text-xl text-center font-bold py-2 rounded-md shadow-lg bg-gray-200">Options</h1>
         {/* first line of form =================*/}
-        <div className="flex justify-between items-center text-sm bg-gray-200 my-3 w-full h-30  p-3">
+        <div className="flex justify-between items-center text-sm rounded-md shadow-lg bg-gray-200 my-3 w-full h-30  p-3">
           <div className="flex">
             <label htmlFor="">Name</label>
             <input
@@ -149,7 +149,7 @@ const BioForm = () => {
           </div>
         </div>
         {/* second line of form ===========*/}
-        <div className="flex justify-between items-center text-sm bg-gray-200 my-3 w-full h-30 p-3">
+        <div className="flex justify-between items-center rounded-md shadow-lg text-sm bg-gray-200 my-3 w-full h-30 p-3">
           <div className="form-check">
             <label className="inline-flex items-center">
               <input
@@ -181,7 +181,7 @@ const BioForm = () => {
           </div>
         </div>
         {/* third line of form ============ */}
-        <div className="flex flex-col bg-gray-200 text-sm my-3 w-full h-30 p-3">
+        <div className="flex flex-col bg-gray-200 text-sm my-3 rounded-md shadow-lg w-full h-30 p-3">
           <div className="flex justify-between items-center mb-2">
             <div className="form-check">
               <label className="inline-flex items-center">
@@ -232,7 +232,7 @@ const BioForm = () => {
           </div>
         </div>
         {/* fourth line of form */}
-        <div className="flex justify-between items-center mb-2 bg-gray-200 text-sm my-3 w-full h-30 p-3">
+        <div className="flex justify-between items-center mb-2 rounded-md shadow-lg bg-gray-200 text-sm my-3 w-full h-30 p-3">
           <div className="form-check">
             <label className="inline-flex items-center">
               <input
@@ -260,7 +260,7 @@ const BioForm = () => {
           </div>
         </div>
         {/* fifth line of form */}
-        <div className="flex justify-between flex-col  mb-2 bg-gray-200 text-sm my-3 w-full h-30 p-3">
+        <div className="flex justify-between flex-col mb-2 rounded-md shadow-lg bg-gray-200 text-sm my-3 w-full h-30 p-3">
           <div className="form-check">
             <label className="inline-flex items-center">
               <input
@@ -291,7 +291,7 @@ const BioForm = () => {
           </div>
         </div>
         {/* sixth line of form */}
-        <div className="flex justify-between flex-col  mb-2 bg-gray-200 text-sm my-3 w-full h-30 p-3">
+        <div className="flex justify-between flex-col rounded-md shadow-lg mb-2 bg-gray-200 text-sm my-3 w-full h-30 p-3">
           <div className="form-check">
             <label className="inline-flex items-center">
               <input
@@ -343,13 +343,13 @@ const BioForm = () => {
         </div>
       </div>
       {/* Result box */}
-      <div className="w-2/5 h-64 m-3 lg:mt-14 lg:ml-5 border-solid border-4 border-sky-500 lg:w-1/5">
-        <h1 className="text-xl text-center font-bold underline">Result Box</h1>
-        <h3 className="p-4">
+      <div className="w-2/5 h-64 m-3 lg:mt-10 lg:ml-5 font-mono lg:w-1/5">
+        <h1 className="text-xl text-center font-bold py-2 rounded-md shadow-lg bg-gray-200 mb-3">Result</h1>
+        <h3 className="p-4 bg-gray-200 rounded-md shadow-lg">
           My name is {name}, and I'm {gender},
           {islocation ? ` my location is ${location},` : ""} {isschool ? `my school was
           ${school},` : ""} my major project was {major}, {isoccupation ? `right now my occupation is ${occupation},` : ""} {isreligious ? `I respect every god ${religious},` : ""}
-          {ismissionaries ? `my missionaries is ${missionaries}.` : ""}
+          {ismissionaries ? ` my missionaries is ${missionaries}.` : ""}
         </h3>
       </div>
     </div>
