@@ -14,6 +14,7 @@ const BioForm = () => {
   const [isreligious, setIsreligious] = useState(false);
   const [missionaries, setMissionaries] = useState("");
   const [ismissionaries, setIsmissionaries] = useState(false);
+  const [file, setFile] = useState();
 
   let nameArr = [
     { name: "Rohit Gupta", gender: "Male" },
@@ -67,8 +68,7 @@ const BioForm = () => {
   ];
 
   const handleMajor = () => {
-    const randomMajor =
-      majorArr[Math.floor(Math.random() * majorArr.length)];
+    const randomMajor = majorArr[Math.floor(Math.random() * majorArr.length)];
     setMajor(randomMajor);
   };
 
@@ -112,10 +112,16 @@ const BioForm = () => {
     setMissionaries(randomMiss);
   };
 
+  const handleImage = (e) => {
+    setFile(URL.createObjectURL(e.target.files[0]));
+  };
+
   return (
     <div className="flex flex-col items-center justify-center lg:flex-row lg:pb-14 sm:pb-24 lg:items-start ">
       <div className="w-2/3 h-full m-3 font-mono lg:mt-10 lg:w-1/3">
-        <h1 className="text-xl text-center font-bold py-2 rounded-md shadow-lg bg-gray-200">Options</h1>
+        <h1 className="text-xl text-center font-bold py-2 rounded-md shadow-lg bg-gray-200">
+          Options
+        </h1>
         {/* first line of form =================*/}
         <div className="flex justify-between items-center text-sm rounded-md shadow-lg bg-gray-200 my-3 w-full h-30  p-3">
           <div className="flex">
@@ -188,7 +194,9 @@ const BioForm = () => {
                 <input
                   type="checkbox"
                   className="form-checkbox h-5 w-5 text-gray-600"
-                  onChange={(e)=> isschool ? setIsschool(false) : setIsschool(true)}
+                  onChange={(e) =>
+                    isschool ? setIsschool(false) : setIsschool(true)
+                  }
                 />
                 <span className="ml-2 text-gray-700">School</span>
               </label>
@@ -197,7 +205,9 @@ const BioForm = () => {
                 type="text"
                 placeholder="School"
                 value={school}
-                onChange={(e) => isschool ? setSchool(e.target.value) : setSchool(null)}
+                onChange={(e) =>
+                  isschool ? setSchool(e.target.value) : setSchool(null)
+                }
               />
             </div>
             <div className="h-full">
@@ -238,7 +248,9 @@ const BioForm = () => {
               <input
                 type="checkbox"
                 className="form-checkbox h-5 w-5 text-gray-600"
-                onChange={(e)=> isoccupation ? setIsoccupation(false) : setIsoccupation(true)}
+                onChange={(e) =>
+                  isoccupation ? setIsoccupation(false) : setIsoccupation(true)
+                }
               />
               <span className="ml-2 text-gray-700">Occupation</span>
             </label>
@@ -247,7 +259,11 @@ const BioForm = () => {
               type="text"
               placeholder="Occupation"
               value={occupation}
-              onChange={(e) => isoccupation ? setOccupation(e.target.value) : setOccupation(null)}
+              onChange={(e) =>
+                isoccupation
+                  ? setOccupation(e.target.value)
+                  : setOccupation(null)
+              }
             />
           </div>
           <div className="h-full">
@@ -266,7 +282,9 @@ const BioForm = () => {
               <input
                 type="checkbox"
                 className="form-checkbox h-5 w-5 text-gray-600"
-                onChange={(e)=> isreligious ? setIsreligious(false) : setIsreligious(true)}
+                onChange={(e) =>
+                  isreligious ? setIsreligious(false) : setIsreligious(true)
+                }
               />
               <span className="ml-2 text-gray-700">Religious Background</span>
             </label>
@@ -277,7 +295,11 @@ const BioForm = () => {
                 type="text"
                 placeholder="Religious Background"
                 value={religious}
-                onChange={(e) => isreligious ? setReligious(e.target.value) : setReligious(null)}
+                onChange={(e) =>
+                  isreligious
+                    ? setReligious(e.target.value)
+                    : setReligious(null)
+                }
               ></textarea>
             </div>
           </div>
@@ -297,7 +319,11 @@ const BioForm = () => {
               <input
                 type="checkbox"
                 className="form-checkbox h-5 w-5 text-gray-600"
-                onChange={(e)=> ismissionaries ? setIsmissionaries(false) : setIsmissionaries(true)}
+                onChange={(e) =>
+                  ismissionaries
+                    ? setIsmissionaries(false)
+                    : setIsmissionaries(true)
+                }
               />
               <span className="ml-2 text-gray-700">
                 Reason for meeting with missionaries
@@ -310,7 +336,11 @@ const BioForm = () => {
                 type="text"
                 placeholder="Reason for meeting with missionaries"
                 value={missionaries}
-                onChange={(e) => ismissionaries ? setMissionaries(e.target.value) : setMissionaries(null)}
+                onChange={(e) =>
+                  ismissionaries
+                    ? setMissionaries(e.target.value)
+                    : setMissionaries(null)
+                }
               ></textarea>
             </div>
           </div>
@@ -341,14 +371,38 @@ const BioForm = () => {
             </button>
           </div>
         </div>
+        {/* seventh line of code upload file */}
+        <div className="flex justify-between items-center mb-2 rounded-md shadow-lg bg-gray-200 text-sm my-3 w-full h-30 p-3">
+          <div className="form-check">
+            <input
+              className="p-1.5 mx-2 border rounded-md shadow-sm"
+              type="file"
+              onChange={(e) => handleImage(e)}
+            />
+          </div>
+          <div className="h-full">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+              Upload File
+            </button>
+          </div>
+        </div>
       </div>
       {/* Result box */}
-      <div className="w-2/5 h-64 m-3 lg:mt-10 lg:ml-5 font-mono lg:w-1/5">
-        <h1 className="text-xl text-center font-bold py-2 rounded-md shadow-lg bg-gray-200 mb-3">Result</h1>
-        <h3 className="p-4 bg-gray-200 rounded-md shadow-lg">
+      <div className="w-2/5 h-64 m-3 lg:mt-10 lg:ml-5 flex flex-col items-center font-mono lg:w-1/5">
+        <h1 className="text-xl w-full text-center font-bold py-2 rounded-md shadow-lg bg-gray-200 mb-3">
+          Result
+        </h1>
+        <img className="h-48 rounded-lg my-4" src={file} alt="Please Upload Your Face" />
+        <h3 className="p-4 w-full bg-gray-200 rounded-md shadow-lg">
           My name is {name}, and I'm {gender},
-          {islocation ? ` my location is ${location},` : ""} {isschool ? `my school was
-          ${school},` : ""} my major project was {major}, {isoccupation ? `right now my occupation is ${occupation},` : ""} {isreligious ? `I respect every god ${religious},` : ""}
+          {islocation ? ` my location is ${location},` : ""}{" "}
+          {isschool
+            ? `my school was
+          ${school},`
+            : ""}{" "}
+          my major project was {major},{" "}
+          {isoccupation ? `right now my occupation is ${occupation},` : ""}{" "}
+          {isreligious ? `I respect every god ${religious},` : ""}
           {ismissionaries ? ` my missionaries is ${missionaries}.` : ""}
         </h3>
       </div>
