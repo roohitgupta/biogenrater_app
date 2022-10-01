@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const BioForm = () => {
   const [name, setName] = useState("Rohit Gupta");
@@ -15,6 +16,11 @@ const BioForm = () => {
   const [missionaries, setMissionaries] = useState("");
   const [ismissionaries, setIsmissionaries] = useState(false);
   const [file, setFile] = useState("/rohit.jpg");
+  const [inputText, setInputText] = useState("");
+  const [detectLanguagekey, setDetectLanguagekey] = useState("");
+  const [languagesList, setLanguagesList] = useState([]);
+  const [selectedLanguageKey, setLanguageKey] = useState("");
+  const [resultText, setResultText] = useState("");
 
   let nameArr = [
     { name: "Rohit Gupta", gender: "Male" },
@@ -26,7 +32,6 @@ const BioForm = () => {
 
   const handleName = () => {
     const randomName = nameArr[Math.floor(Math.random() * nameArr.length)].name;
-
     setName(randomName);
   };
 
@@ -110,18 +115,57 @@ const BioForm = () => {
     setMissionaries(randomMiss);
   };
 
+  // Image uplode
   const handleImage = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
 
+  // detect language text
+  const getLanguageSource = () => {
+    axios
+      .post(`https://libretranslate.de/detect`, {
+        q: inputText
+      })
+      .then((response) => {
+        setDetectLanguagekey(response.data[0].language)
+      })
+      .catch((error)=>{
+        console.log("error:", error)
+      })
+  };
+
+  const languageKey = (selectedLanguage) => {
+    setLanguageKey(selectedLanguage.target.value);
+  };
+
+  const translateText = () => {
+    getLanguageSource();
+
+    let data = {
+      q: inputText,
+      source: detectLanguagekey,
+      target: selectedLanguageKey,
+    };
+    axios.post(`https://libretranslate.de/translate`, data).then((response) => {
+      setResultText(response.data.translatedText);
+    });
+  };
+
+  useEffect(() => {
+    axios.get(`https://libretranslate.de/languages`).then((response) => {
+      setLanguagesList(response.data);
+    });
+    getLanguageSource();
+  }, [inputText]);
+
   return (
-    <div className="flex flex-col items-center justify-center lg:flex-row lg:pb-14 sm:pb-24 lg:items-start ">
+    <div className="flex flex-col items-center justify-center lg:flex-row h-full lg:pb-14 sm:bg-cover lg:items-start ">
       <div className="w-2/3 h-full m-3 font-mono lg:mt-10 lg:w-1/3">
-        <h1 className="text-xl text-center font-bold py-2 rounded-md shadow-lg bg-gray-200">
+        <h1 className="text-xl text-center font-bold py-2 rounded-md shadow-lg bg-gray-100">
           Options
         </h1>
         {/* image file */}
-        <div className="flex justify-between items-center mb-2 rounded-md shadow-lg bg-gray-200 text-sm my-3 w-full h-30 p-3">
+        <div className="flex justify-between items-center mb-2 rounded-md shadow-lg bg-gray-100 text-sm my-3 w-full h-30 p-3">
           <div className="form-check">
             <input
               className="p-1.5 mx-2 border rounded-md shadow-sm"
@@ -130,14 +174,14 @@ const BioForm = () => {
             />
           </div>
           <div className="h-full">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+            <button className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-black text-white font-bold py-1 px-6 rounded ">
               Upload File
             </button>
           </div>
         </div>
         {/* first line of form =================*/}
-        <div className="flex justify-between items-center text-sm rounded-md shadow-lg bg-gray-200 my-3 w-full h-30  p-3">
-          <div className="flex">
+        <div className="flex justify-between items-center text-sm rounded-md shadow-lg bg-gray-100 my-3 w-full h-30 p-3">
+          <div className="flex justify-between items-center">
             <label htmlFor="">Name</label>
             <input
               className="p-1.5 mx-2 rounded-md shadow-sm"
@@ -147,7 +191,7 @@ const BioForm = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div className="flex">
+          <div className="flex justify-between items-center">
             <label htmlFor="">Gender</label>
             <select
               className="w-full mx-2 p-1.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
@@ -160,7 +204,7 @@ const BioForm = () => {
           </div>
           <div className="">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-black  text-white font-bold py-1 px-6 rounded"
               onClick={(e) => handleName()}
             >
               Random Name
@@ -168,7 +212,7 @@ const BioForm = () => {
           </div>
         </div>
         {/* second line of form ===========*/}
-        <div className="flex justify-between items-center rounded-md shadow-lg text-sm bg-gray-200 my-3 w-full h-30 p-3">
+        <div className="flex justify-between items-center rounded-md shadow-lg text-sm bg-gray-100 my-3 w-full h-30 p-3">
           <div className="form-check">
             <label className="inline-flex items-center">
               <input
@@ -193,14 +237,14 @@ const BioForm = () => {
           <div className="h-full">
             <button
               onClick={(e) => handleLocation()}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-black text-white font-bold py-1 px-2 rounded"
             >
               Random Location
             </button>
           </div>
         </div>
         {/* third line of form ============ */}
-        <div className="flex flex-col bg-gray-200 text-sm my-3 rounded-md shadow-lg w-full h-30 p-3">
+        <div className="flex flex-col bg-gray-100 text-sm my-3 rounded-md shadow-lg w-full h-30 p-3">
           <div className="flex justify-between items-center mb-2">
             <div className="form-check">
               <label className="inline-flex items-center">
@@ -225,7 +269,7 @@ const BioForm = () => {
             </div>
             <div className="h-full">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+                className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-black text-white font-bold py-1 px-4 rounded"
                 onClick={(e) => handleSchool()}
               >
                 Random School
@@ -246,7 +290,7 @@ const BioForm = () => {
 
             <div>
               <button
-                className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-1 px-2 rounded"
+                className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-black text-white font-bold py-1 px-5 rounded"
                 onClick={(e) => handleMajor()}
               >
                 Random Major
@@ -255,7 +299,7 @@ const BioForm = () => {
           </div>
         </div>
         {/* fourth line of form */}
-        <div className="flex justify-between items-center mb-2 rounded-md shadow-lg bg-gray-200 text-sm my-3 w-full h-30 p-3">
+        <div className="flex justify-between items-center mb-2 rounded-md shadow-lg bg-gray-100 text-sm my-3 w-full h-30 p-3">
           <div className="form-check">
             <label className="inline-flex items-center">
               <input
@@ -281,7 +325,7 @@ const BioForm = () => {
           </div>
           <div className="h-full">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-black text-white font-bold py-1 px-2 rounded"
               onClick={(e) => handleOccupation()}
             >
               Random Occupation
@@ -289,7 +333,7 @@ const BioForm = () => {
           </div>
         </div>
         {/* fifth line of form */}
-        <div className="flex justify-between flex-col mb-2 rounded-md shadow-lg bg-gray-200 text-sm my-3 w-full h-30 p-3">
+        <div className="flex justify-between flex-col mb-2 rounded-md shadow-lg bg-gray-100 text-sm my-3 w-full h-30 p-3">
           <div className="form-check">
             <label className="inline-flex items-center">
               <input
@@ -303,7 +347,7 @@ const BioForm = () => {
             </label>
             <div>
               <textarea
-                className="p-1.5 w-full text-base mx-2 border rounded-md shadow-sm"
+                className="p-1.5 w-full text-base border rounded-md shadow-sm"
                 rows="4"
                 type="text"
                 placeholder="Religious Background"
@@ -319,14 +363,14 @@ const BioForm = () => {
           <div className="h-full">
             <button
               onClick={(e) => handleRelegious()}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-black text-white font-bold py-1 px-2 my-1 rounded"
             >
               Random Religious
             </button>
           </div>
         </div>
         {/* sixth line of form */}
-        <div className="flex justify-between flex-col rounded-md shadow-lg mb-2 bg-gray-200 text-sm my-3 w-full h-30 p-3">
+        <div className="flex justify-between flex-col rounded-md shadow-lg mb-2 bg-gray-100 text-sm my-3 w-full h-30 p-3">
           <div className="form-check">
             <label className="inline-flex items-center">
               <input
@@ -344,7 +388,7 @@ const BioForm = () => {
             </label>
             <div>
               <textarea
-                className="p-1.5 w-full text-base mx-2 border rounded-md shadow-sm"
+                className="p-1.5 w-full text-base border rounded-md shadow-sm "
                 rows="4"
                 type="text"
                 placeholder="Reason for meeting with missionaries"
@@ -359,25 +403,25 @@ const BioForm = () => {
           </div>
           <div className="h-full">
             <button
-              className="bg-pink-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded"
+              className="bg-gradient-to-r from-pink-500 to-blue-500 hover:text-black text-white font-bold py-1 mx-2 my-1 px-2 rounded"
               onClick={(e) => handleMissionaries()}
             >
               Restoration
             </button>
             <button
-              className="bg-green-500 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded"
+              className="bg-gradient-to-r from-green-600 to-blue-500 hover:text-black text-white font-bold py-1 mx-2 px-2 rounded"
               onClick={(e) => handleMissionaries()}
             >
               Plan of Salvation
             </button>
             <button
-              className="bg-purple-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded"
+              className="bg-gradient-to-r from-purple-600 to-blue-500 hover:text-black text-white font-bold py-1 mx-2 px-2 rounded"
               onClick={(e) => handleMissionaries()}
             >
               Gospel of Christ
             </button>
             <button
-              className="bg-orange-400 hover:bg-blue-700 text-white font-bold py-1 mx-2 px-2 rounded"
+              className="bg-gradient-to-r from-orange-600 to-blue-500 hover:text-black text-white font-bold py-1 mx-2 px-2 rounded"
               onClick={(e) => handleMissionaries()}
             >
               Law of Chastity
@@ -385,11 +429,10 @@ const BioForm = () => {
           </div>
         </div>
         {/* seventh line of code upload file */}
-        
       </div>
       {/* Result box */}
       <div className="w-2/5 h-64 m-3 lg:mt-10 lg:ml-5 flex flex-col items-center font-mono lg:w-1/5">
-        <h1 className="text-xl w-full text-center font-bold py-2 rounded-md shadow-lg bg-gray-200 mb-3">
+        <h1 className="text-xl w-full text-center font-bold py-2 rounded-md shadow-lg bg-gray-100 mb-3">
           Result
         </h1>
         <img
@@ -397,7 +440,7 @@ const BioForm = () => {
           src={file}
           alt="Please Upload Your Face"
         />
-        <h3 className="p-4 w-full bg-gray-200 rounded-md shadow-lg">
+        <h3 className="p-4 w-full bg-gray-100 rounded-md shadow-lg">
           My name is {name}, and I'm {gender},
           {islocation ? ` my location is ${location},` : ""}
           {isschool
@@ -409,6 +452,38 @@ const BioForm = () => {
           {isreligious ? ` I respect every god ${religious},` : ""}
           {ismissionaries ? ` my missionaries is ${missionaries}.` : ""}
         </h3>
+
+        <div className="w-full my-3">
+          <textarea
+            className="p-1.5 w-full text-base border rounded-md shadow-sm "
+            rows="4"
+            type="text"
+            placeholder="Type Text to Translate.."
+            onChange={(e) => setInputText(e.target.value)}
+          ></textarea>
+
+          <select
+            className="w-full border rounded-md my-3"
+            name=""
+            id=""
+            onChange={(e) => languageKey(e)}
+          >
+            <option value="">Please Select Language..</option>
+            {languagesList.map((e) => (
+              <option key={e.code} value={e.code}>{e.name}</option>
+            ))}
+          </select>
+
+          <textarea
+            className="p-1.5 w-full text-base border rounded-md shadow-sm "
+            rows="4"
+            type="text"
+            placeholder="Your Result Translation.."
+            defaultValue={resultText}
+          ></textarea>
+
+          <button className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-black text-white font-bold py-1 px-2 my-1 rounded" onClick={(e) => translateText()}>Translate</button>
+        </div>
       </div>
     </div>
   );
