@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+// import axios from "axios";
 
 const BioForm = () => {
   const [name, setName] = useState("Rohit Gupta");
@@ -16,12 +16,14 @@ const BioForm = () => {
   const [missionaries, setMissionaries] = useState("");
   const [ismissionaries, setIsmissionaries] = useState(false);
   const [file, setFile] = useState("/rohit.jpg");
-  const [inputText, setInputText] = useState("");
-  const [detectLanguagekey, setDetectLanguagekey] = useState("");
-  const [languagesList, setLanguagesList] = useState([]);
-  const [selectedLanguageKey, setLanguageKey] = useState("");
-  const [resultText, setResultText] = useState("");
+  // const [inputText, setInputText] = useState("");
+  // const [detectLanguagekey, setDetectLanguagekey] = useState("");
+  // const [languagesList, setLanguagesList] = useState([]);
+  // const [selectedLanguageKey, setLanguageKey] = useState("");
+  // const [resultText, setResultText] = useState("");
 
+
+  //random name array
   let nameArr = [
     { name: "Rohit Gupta", gender: "Male" },
     { name: "Aman Sharma", gender: "Male" },
@@ -35,6 +37,8 @@ const BioForm = () => {
     setName(randomName);
   };
 
+
+  //random location array
   let locationArr = [
     "Indore, Madhya Pradesh",
     "Bhopal, Madhya Pradesh",
@@ -49,6 +53,8 @@ const BioForm = () => {
     setLocation(randomLocation);
   };
 
+
+  //random school array
   let schoolArr = [
     "G.D. Goeanka, Indore",
     "Delhi Public School, Bhopal",
@@ -62,6 +68,8 @@ const BioForm = () => {
     setSchool(randomSchool);
   };
 
+
+  //random major project array
   let majorArr = [
     "Graphic Design",
     "History",
@@ -75,6 +83,8 @@ const BioForm = () => {
     setMajor(randomMajor);
   };
 
+
+  // random occupation array
   let occupationArr = [
     "musician",
     "salesperson",
@@ -89,6 +99,8 @@ const BioForm = () => {
     setOccupation(randomOccu);
   };
 
+
+  //random religious array
   let religiousArr = [
     "in a family that always encouraged a belief in God, but never attended one church consistently",
     "believing in Christ because was taught to as grew up",
@@ -102,6 +114,8 @@ const BioForm = () => {
     setReligious(randomRele);
   };
 
+
+  //random miss array
   let missArr = [
     "wants to know if God really does exist and how that affects ",
     "recieved a priesthood blessing from a friend and now wants to learn more",
@@ -115,47 +129,54 @@ const BioForm = () => {
     setMissionaries(randomMiss);
   };
 
-  // Image uplode
+
+  // Image uplode function
   const handleImage = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
 
-  // detect language text
-  const getLanguageSource = () => {
-    axios
-      .post(`https://libretranslate.de/detect`, {
-        q: inputText
-      })
-      .then((response) => {
-        setDetectLanguagekey(response.data[0].language)
-      })
-      .catch((error)=>{
-        console.log("error:", error)
-      })
-  };
 
-  const languageKey = (selectedLanguage) => {
-    setLanguageKey(selectedLanguage.target.value);
-  };
+  // // detect language text 
+  // const getLanguageSource = () => {
+  //   axios
+  //     .post(`https://libretranslate.de/detect`, {
+  //       q: inputText
+  //     })
+  //     .then((response) => {
+  //       setDetectLanguagekey(response.data[0].language)
+  //     })
+  //     .catch((error)=>{
+  //       console.log("error:", error)
+  //     })
+  // };
 
-  const translateText = () => {
-    getLanguageSource();
+  // //get target language from user
+  // const languageKey = (selectedLanguage) => {
+  //   setLanguageKey(selectedLanguage.target.value);
+  // };
 
-    let data = {
-      q: inputText,
-      source: detectLanguagekey,
-      target: selectedLanguageKey,
-    };
-    axios.post(`https://libretranslate.de/translate`, data).then((response) => {
-      setResultText(response.data.translatedText);
-    });
-  };
+  // //translate text function
+  // const translateText = () => {
+  //   getLanguageSource();
 
-  useEffect(() => {
-    axios.get(`https://libretranslate.de/languages`).then((response) => {
-      setLanguagesList(response.data);
-    });
-  }, [inputText]);
+  //   let data = {
+  //     q: inputText,
+  //     source: detectLanguagekey,
+  //     target: selectedLanguageKey,
+  //   };
+  //   axios.post(`https://libretranslate.de/translate`, data).then((response) => {
+  //     setResultText(response.data.translatedText);
+  //   });
+  // };
+
+
+  // useEffect(() => {
+  //   axios.get(`https://libretranslate.de/languages`).then((response) => {
+  //     setLanguagesList(response.data);
+  //   });
+  // }, [inputText]);
+
+
 
   return (
     <div className="flex flex-col items-center justify-center lg:flex-row h-full lg:pb-14 sm:bg-cover lg:items-start ">
@@ -439,7 +460,13 @@ const BioForm = () => {
           src={file}
           alt="Please Upload Your Face"
         />
-        <h3 className="p-4 w-full bg-gray-100 rounded-md shadow-lg">
+
+<div id="google_translate_element"></div>
+
+        <h3 
+        className="p-4 w-full bg-gray-100 rounded-md shadow-lg" 
+         >
+
           My name is {name}, and I'm {gender},
           {islocation ? ` my location is ${location},` : ""}
           {isschool
@@ -452,7 +479,11 @@ const BioForm = () => {
           {ismissionaries ? ` my missionaries is ${missionaries}.` : ""}
         </h3>
 
-        <div className="w-full my-3">
+
+
+
+
+        {/* <div className="w-full my-3">
           <textarea
             className="p-1.5 w-full text-base border rounded-md shadow-sm "
             rows="4"
@@ -482,7 +513,7 @@ const BioForm = () => {
           ></textarea>
 
           <button className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-black text-white font-bold py-1 px-2 my-1 rounded" onClick={(e) => translateText()}>Translate</button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
