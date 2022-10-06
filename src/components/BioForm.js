@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 // import axios from "axios";
 
 const BioForm = () => {
@@ -16,12 +16,25 @@ const BioForm = () => {
   const [missionaries, setMissionaries] = useState("");
   const [ismissionaries, setIsmissionaries] = useState(false);
   const [file, setFile] = useState("/rohit.jpg");
+  const [videoFile, setVideoFile] = useState("");
   // const [inputText, setInputText] = useState("");
   // const [detectLanguagekey, setDetectLanguagekey] = useState("");
   // const [languagesList, setLanguagesList] = useState([]);
   // const [selectedLanguageKey, setLanguageKey] = useState("");
   // const [resultText, setResultText] = useState("");
 
+  const inputRef = useRef();
+
+  // video uplode function
+  const handleVideo = (event) => {
+    const file = event.target.files[0];
+    const url = URL.createObjectURL(file);
+    setVideoFile(url);
+  };
+
+  const handleChoose = (event) => {
+    inputRef.current.click();
+  };
 
   //random name array
   let nameArr = [
@@ -36,7 +49,6 @@ const BioForm = () => {
     const randomName = nameArr[Math.floor(Math.random() * nameArr.length)].name;
     setName(randomName);
   };
-
 
   //random location array
   let locationArr = [
@@ -53,7 +65,6 @@ const BioForm = () => {
     setLocation(randomLocation);
   };
 
-
   //random school array
   let schoolArr = [
     "G.D. Goeanka, Indore",
@@ -68,7 +79,6 @@ const BioForm = () => {
     setSchool(randomSchool);
   };
 
-
   //random major project array
   let majorArr = [
     "Graphic Design",
@@ -82,7 +92,6 @@ const BioForm = () => {
     const randomMajor = majorArr[Math.floor(Math.random() * majorArr.length)];
     setMajor(randomMajor);
   };
-
 
   // random occupation array
   let occupationArr = [
@@ -99,7 +108,6 @@ const BioForm = () => {
     setOccupation(randomOccu);
   };
 
-
   //random religious array
   let religiousArr = [
     "in a family that always encouraged a belief in God, but never attended one church consistently",
@@ -113,7 +121,6 @@ const BioForm = () => {
       religiousArr[Math.floor(Math.random() * religiousArr.length)];
     setReligious(randomRele);
   };
-
 
   //random miss array
   let missArr = [
@@ -129,14 +136,12 @@ const BioForm = () => {
     setMissionaries(randomMiss);
   };
 
-
   // Image uplode function
   const handleImage = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
 
-
-  // // detect language text 
+  // // detect language text
   // const getLanguageSource = () => {
   //   axios
   //     .post(`https://libretranslate.de/detect`, {
@@ -169,17 +174,14 @@ const BioForm = () => {
   //   });
   // };
 
-
   // useEffect(() => {
   //   axios.get(`https://libretranslate.de/languages`).then((response) => {
   //     setLanguagesList(response.data);
   //   });
   // }, [inputText]);
 
-
-
   return (
-    <div className="flex flex-col items-center justify-center lg:flex-row h-full lg:pb-14 sm:bg-cover lg:items-start ">
+    <div className="flex flex-col items-center justify-center lg:flex-row h-full lg:pb-14 sm:bg-cover sm:pb-96 lg:items-start ">
       <div className="w-2/3 h-full m-3 font-mono lg:mt-10 lg:w-1/3">
         <h1 className="text-xl text-center font-bold py-2 rounded-md shadow-lg bg-gray-100">
           Options
@@ -199,6 +201,7 @@ const BioForm = () => {
             </button>
           </div>
         </div>
+        
         {/* first line of form =================*/}
         <div className="flex justify-between items-center text-sm rounded-md shadow-lg bg-gray-100 my-3 w-full h-30 p-3">
           <div className="flex justify-between items-center">
@@ -461,12 +464,20 @@ const BioForm = () => {
           alt="Please Upload Your Face"
         />
 
-<div id="google_translate_element"></div>
+        <input
+          ref={inputRef}
+          type="file"
+          onChange={handleVideo}
+          accept=".mkv,.mp4"
+        />
+        {!videoFile && <button onClick={handleChoose} className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-black  text-white font-bold py-1 px-6 rounded">Choose Video</button>}
+        {videoFile && (
+          <video className="rounded-lg my-4" width="100%" height="200px" controls src={videoFile}></video>
+        )}
 
-        <h3 
-        className="p-4 w-full bg-gray-100 rounded-md shadow-lg" 
-         >
+        <div id="google_translate_element"></div>
 
+        <h3 className="p-4 w-full bg-gray-100 rounded-md shadow-lg">
           My name is {name}, and I'm {gender},
           {islocation ? ` my location is ${location},` : ""}
           {isschool
@@ -478,10 +489,6 @@ const BioForm = () => {
           {isreligious ? ` I respect every god ${religious},` : ""}
           {ismissionaries ? ` my missionaries is ${missionaries}.` : ""}
         </h3>
-
-
-
-
 
         {/* <div className="w-full my-3">
           <textarea
